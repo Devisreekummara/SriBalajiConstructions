@@ -1,0 +1,60 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-banner">
+    <h1>Contact Us</h1>
+    <p>Let's discuss your construction requirements</p>
+</section>
+
+<section class="content-section">
+    <h2>Send Us an Enquiry</h2>
+
+    <p>
+        Share your contact details and project requirements.
+        Our enquiry form will be connected to the database in a later step.
+    </p>
+
+    <form class="contact-form" id="enquiryForm" action="/contact" method="POST">
+
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name"
+               placeholder="Enter your name" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone"
+               placeholder="Enter your phone number"
+               pattern="[0-9]{10}" maxlength="10" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email"
+               placeholder="Enter your email" required>
+
+        <label for="service">Service Required</label>
+        <select id="service" name="service" required>
+            <option value="">Select a service</option>
+            <option>Residential Construction</option>
+            <option>Commercial Construction</option>
+            <option>Renovation</option>
+            <option>Planning and Design</option>
+            <option>Interior Work</option>
+            <option>Other</option>
+        </select>
+
+        <label for="message">Project Details</label>
+        <textarea id="message" name="message"
+                  placeholder="Describe your project" required></textarea>
+
+        <button type="submit" class="btn">Submit Enquiry</button>
+
+        <!-- <p id="formMessage" role="status"></p> -->
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
+    </form>
+</section>
+
+{% endblock %}

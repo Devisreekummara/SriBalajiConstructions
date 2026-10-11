@@ -1,0 +1,29 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-banner">
+    <h1>Admin Login</h1>
+    <p>Sri Balaji Constructions Management</p>
+</section>
+
+<section class="content-section">
+    <form class="contact-form" action="/login" method="POST">
+
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username"
+               placeholder="Enter admin username" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password"
+               placeholder="Enter admin password" required>
+
+        <button type="submit" class="btn">Login</button>
+
+        <p id="loginMessage" role="status"></p>
+
+    </form>
+</section>
+
+{% endblock %}

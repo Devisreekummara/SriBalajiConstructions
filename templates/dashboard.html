@@ -1,0 +1,75 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-banner">
+    <h1>Admin Dashboard</h1>
+    <p>Sri Balaji Constructions Management</p>
+</section>
+
+<section class="content-section">
+
+    {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endwith %}
+
+    <h2>Customer Enquiries</h2>
+
+    {% if enquiries %}
+        {% for enquiry in enquiries %}
+            <div class="dashboard-box">
+                <h3>{{ enquiry['name'] }}</h3>
+                <p><strong>Phone:</strong> {{ enquiry['phone'] }}</p>
+                <p><strong>Email:</strong> {{ enquiry['email'] }}</p>
+                <p><strong>Service:</strong> {{ enquiry['service'] }}</p>
+                <p><strong>Details:</strong> {{ enquiry['message'] }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No enquiries received yet.</p>
+    {% endif %}
+
+    <hr>
+
+    <h2 style="margin-top: 30px;">Add a Construction Project</h2>
+
+    <form class="contact-form" action="/add-project" method="POST">
+
+        <label for="projectName">Project Name</label>
+        <input type="text" id="projectName" name="name" required>
+
+        <label for="projectDescription">Project Description</label>
+        <textarea id="projectDescription" name="description" required></textarea>
+
+        <label for="projectStatus">Project Status</label>
+        <select id="projectStatus" name="status">
+            <option>Planning</option>
+            <option>In Progress</option>
+            <option>Completed</option>
+        </select>
+
+        <button type="submit" class="btn">Add Project</button>
+    </form>
+
+    <h2>Current Projects</h2>
+
+    {% if projects %}
+        {% for project in projects %}
+            <div class="dashboard-box">
+                <h3>{{ project['name'] }}</h3>
+                <p>{{ project['description'] }}</p>
+                <p><strong>Status:</strong> {{ project['status'] }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No projects added yet.</p>
+    {% endif %}
+
+    <a href="/logout" class="btn">Logout</a>
+
+</section>
+
+{% endblock %}
